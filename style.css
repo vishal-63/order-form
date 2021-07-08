@@ -122,4 +122,7 @@ body {
   #applyCoupon {
     flex-direction: row;
   }
+  #paypal-button {
+    max-width: 300px;
+  }
 }

@@ -266,6 +266,7 @@ paypal
       shape: "rect",
       label: "pay",
       tagline: false,
+      height: 40,
     },
     createOrder: function (data, actions) {
       return actions.order.create({
