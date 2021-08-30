@@ -182,13 +182,15 @@ const submitForm = () => {
     document.querySelectorAll(".order-details")[7].innerHTML =
       "Net Amount: $" + discounted_amount;
     window.scrollTo(0, document.body.scrollHeight);
+    sendEmail("Requested", "");
   } else {
     error = [];
   }
 };
 
-function sendEmail() {
+function sendEmail(orderStatus, paymentDetails) {
   var templateParams = {
+    order_status: orderStatus,
     from_name: document.getElementById("name").value,
     to_name: "Andrea Klarin",
     from_email: document.getElementById("email").value,
@@ -200,6 +202,7 @@ function sendEmail() {
     discount_amount: discount_amount,
     discounted_amount: discounted_amount,
     keyword: document.getElementById("keyword-url").value,
+    payment_details: paymentDetails,
   };
 
   emailjs
@@ -282,7 +285,7 @@ paypal
     onApprove: function (data, actions) {
       return actions.order.capture().then(function (details) {
         window.alert("Thank you for your purchase!");
-        sendEmail();
+        sendEmail("Payment Successful", details);
       });
     },
   })
